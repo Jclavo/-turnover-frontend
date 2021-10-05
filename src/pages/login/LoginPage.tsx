@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 //CSS
-import './Login.css';
+import './LoginPage.css';
 
 //Interfaces
 import { Response } from "../../interfaces/Response";
@@ -20,7 +20,7 @@ import { useUserService } from "../../hooks/useUserService";
 import { useAuthentication } from "../../hooks/useAuthentication";
 
 
-const Login: React.FC<RouteComponentProps> = (props) => {
+const LoginPage: React.FC<RouteComponentProps> = (props) => {
 
     const [user, setUser] = useState<User>();
 
@@ -148,7 +148,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
                     isOpen={showAlert}
                     onDidDismiss={() => setShowAlert(false)}
                     cssClass='my-custom-class'
-                    header={'Mensagem'}
+                    header={'Message'}
                     message={messageAlert}
                     buttons={['OK']}
                 />
@@ -159,4 +159,4 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     );
 };
 
-export default Login;
+export default LoginPage;
