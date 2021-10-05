@@ -66,7 +66,7 @@ const Menu: React.FC = () => {
   const location = useLocation();
 
   return (
-    <IonMenu contentId="main" type="overlay" hidden={location.pathname === '/login' ? true : false}>
+    <IonMenu contentId="main" type="overlay" hidden={location.pathname === '/login'  || location.pathname === '/user' ? true : false}>
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>Inbox</IonListHeader>

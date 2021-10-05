@@ -23,8 +23,8 @@ import './theme/variables.css';
 
 /** Custom imports */
 import Menu from './components/Menu';
-import Page from './pages/Page';
 import Login from './pages/login/Login';
+import UserPage from './pages/user/UserPage';
 
 const App: React.FC = () => {
   return (
@@ -40,7 +40,8 @@ const App: React.FC = () => {
               <Page />
             </Route> */}
             <Route path="/login" component={Login} exact />
-            <Redirect from="/" to="/login" exact />
+            <Route path="/user" component={UserPage} exact />
+            <Redirect from="/" to="/user" exact />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
