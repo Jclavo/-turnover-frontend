@@ -1,12 +1,11 @@
 import {
     IonContent, IonHeader, IonPage, IonTitle,
     IonToolbar, IonItem, IonInput, IonLabel, IonRow, IonCol,
-    IonGrid, IonButton, IonAlert, useIonViewDidEnter, IonDatetime, IonTextarea
+    IonGrid, IonButton, IonAlert, useIonViewDidEnter, IonDatetime, IonTextarea, IonBadge
 } from '@ionic/react';
 
 import { RouteComponentProps } from 'react-router';
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { format } from "date-fns";
 
 //CSS
@@ -18,7 +17,7 @@ import { Purchase } from "../../../interfaces/Purchase";
 
 //Hooks
 import { usePurchaseService } from "../../../hooks/usePurchaseService";
-
+import { useUserService } from "../../../hooks/useUserService";
 
 const PurchasePage: React.FC<RouteComponentProps> = (props) => {
 
@@ -26,10 +25,10 @@ const PurchasePage: React.FC<RouteComponentProps> = (props) => {
     const [messageAlert, setMessageAlert] = useState<string>();
 
     const { purchaseCreate } = usePurchaseService();
+    const { userGetBalance } = useUserService();
 
+    const [balance, setBalance] = useState<number>(0);
     const [purchase, setPurchase] = useState<Purchase>();
-
-
 
     const handleChange = (e: any) => {
 
@@ -42,6 +41,14 @@ const PurchasePage: React.FC<RouteComponentProps> = (props) => {
 
     }
 
+    //useEffect when page loads and selectedDate changes
+    useEffect(() => {
+
+        //get user balance
+        getUserBalance()
+
+    }, [props]);
+
     const create = () => {
 
         purchaseCreate(purchase).then((response: Response) => {
@@ -52,6 +59,17 @@ const PurchasePage: React.FC<RouteComponentProps> = (props) => {
             }
         });
 
+    }
+
+    const getUserBalance = () => {
+
+        userGetBalance().then((response: Response) => {
+            if (response?.status) {
+                setBalance(response?.result)
+            } else {
+                showCustomAlert(response?.message)
+            }
+        });
     }
 
     const showCustomAlert = (message: string) => {
@@ -67,6 +85,11 @@ const PurchasePage: React.FC<RouteComponentProps> = (props) => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
+
+                <IonItem>
+                    <IonLabel>BALANCE</IonLabel>
+                    <IonBadge slot="end" color="warning">$ {balance}</IonBadge>
+                </IonItem>
 
                 <IonGrid>
                     <IonRow className="ion-align-items-center">
