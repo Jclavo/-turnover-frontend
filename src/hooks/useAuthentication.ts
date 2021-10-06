@@ -1,7 +1,7 @@
 //Interfaces
 import { User } from "../interfaces/User";
 
-const CREDENTIALS_STORAGE = "user_bnb_bank_token";
+const CREDENTIALS_STORAGE = "user_bnb_bank";
 
 export function useAuthentication() {
 
