@@ -60,14 +60,11 @@ const LoginPage: React.FC<RouteComponentProps> = (props) => {
         if (formValidation(user)) return;
 
         userLogin(user).then((response: Response) => {
-            showCustomAlert(response?.message)
             if (response?.status) {
-
                 saveUserInStorage(response?.result as User);
-
-                setUser(undefined);
-
-                props.history.push('/home');
+                props.history.push('/balance');
+            }else{
+                showCustomAlert(response?.message)
             }
         });
 
