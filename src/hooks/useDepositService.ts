@@ -20,8 +20,15 @@ export function useDepositService() {
         return res.data as unknown as Response;
     };
 
+    const depositCreate = async (deposit : Deposit | undefined) => {
+        const URL = API_URL + MODEL;
+
+        const res = await axios.post(URL, deposit, getHeader());
+        return res.data as unknown as Response;
+    };
 
     return {
-        depositPagination
+        depositPagination,
+        depositCreate
     };
 }
