@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { cashOutline, heartSharp, arrowDown } from 'ionicons/icons';
+import { cashOutline, heartSharp, arrowDown, book } from 'ionicons/icons';
 import './Menu.css';
 
 //hooks
@@ -37,8 +37,8 @@ const appPages: AppPage[] = [
     mdIcon: arrowDown
   },
   {
-    title: 'Deposits',
-    url: '/deposits',
+    title: 'Checks',
+    url: '/checks',
     mdIcon: cashOutline
   },
 
