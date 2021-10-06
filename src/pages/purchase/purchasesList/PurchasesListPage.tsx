@@ -1,10 +1,10 @@
 import {
     IonContent, IonHeader, IonPage, IonTitle,
     IonToolbar, IonItem, IonLabel,
-    IonButton, IonAlert, IonDatetime,
+    IonAlert, IonDatetime,
     IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle, IonFab, IonFabButton,
 } from '@ionic/react';
-import { cashOutline, arrowDown, add } from 'ionicons/icons';
+import { add } from 'ionicons/icons';
 import { RouteComponentProps } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
@@ -13,22 +13,21 @@ import './PurchasesListPage.css';
 
 //Interfaces
 import { Response } from "../../../interfaces/Response";
-import { User } from "../../../interfaces/User";
 import { Purchase } from "../../../interfaces/Purchase";
 
 //Hooks
 import { usePurchaseService } from "../../../hooks/usePurchaseService";
+import { useUserService } from "../../../hooks/useUserService";
 
 const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
 
     const { purchasePagination } = usePurchaseService();
+    const { userGetBalance } = useUserService();
 
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>();
-
-    const [user, setUser] = useState<User>();
-    const [incomes, setIncomes] = useState<number>(0);
-    const [expenses, setExpenses] = useState<number>(0);
+    
+    const [balance, setBalance] = useState<number>(0);
 
     const [purchase, setPurchase] = useState<Purchase>();
     const [purchases, setPurchases] = useState<Purchase[]>([]);
@@ -46,6 +45,9 @@ const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
         }));
         setPurchases([])
 
+        //get user balance
+        getUserBalance()
+
     }, [props, selectedDate]);
 
     //useEffect to get purchases
@@ -60,6 +62,17 @@ const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
         purchasePagination(purchase).then((response: Response) => {
             if (response?.status) {
                 setPurchases(response?.result as Purchase[] ?? [])
+            } else {
+                showCustomAlert(response?.message)
+            }
+        });
+    }
+
+    const getUserBalance = () => {
+
+        userGetBalance().then((response: Response) => {
+            if (response?.status) {
+                setBalance(response?.result)
             } else {
                 showCustomAlert(response?.message)
             }
@@ -82,6 +95,10 @@ const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
 
                 <IonItem>
                     <IonDatetime displayFormat="YYYY-MM-DD" placeholder="Select Date" value={selectedDate} onIonChange={e => setSelectedDate(e.detail.value!)} ></IonDatetime>
+                </IonItem>
+                <IonItem>
+                    <IonLabel>BALANCE</IonLabel>
+                    <IonBadge slot="end" color="warning">$ {balance}</IonBadge>
                 </IonItem>
 
                 {purchases.map((purchase, idx) =>
