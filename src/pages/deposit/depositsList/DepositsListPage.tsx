@@ -55,7 +55,7 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
         }));
         setDeposits([]);
 
-    }, [selectedDate, depositStatus]);
+    }, [props, selectedDate, depositStatus]);
 
     //useEffect to get deposits
     useEffect(() => {
@@ -95,7 +95,7 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar color="primary">
-                    <IonTitle><strong>BNB Bank</strong></IonTitle>
+                    <IonTitle><strong>CHECKS</strong></IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
