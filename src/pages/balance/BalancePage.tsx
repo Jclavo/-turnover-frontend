@@ -13,7 +13,6 @@ import './BalancePage.css';
 
 //Interfaces
 import { Response } from "../../interfaces/Response";
-import { User } from "../../interfaces/User";
 import { Purchase } from "../../interfaces/Purchase";
 import { Deposit } from "../../interfaces/Deposit";
 import { Transaction } from "../../interfaces/Transaction";
@@ -28,12 +27,12 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
 
     const { purchasePagination } = usePurchaseService();
     const { depositPagination } = useDepositService();
-    const { userGetInfo } = useUserService();
+    const { userGetBalance } = useUserService();
 
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>();
 
-    const [user, setUser] = useState<User>();
+    const [balance, setBalance] = useState<number>(0);
     const [incomes, setIncomes] = useState<number>(0);
     const [expenses, setExpenses] = useState<number>(0);
 
@@ -63,8 +62,8 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
         }));
         setDeposits([])
 
-        //for user
-        getUserInfo()
+        //get user balance
+        getUserBalance()
 
     }, [props, selectedDate]);
 
@@ -120,34 +119,15 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
         });
     }
 
-    const getUserInfo = () => {
+    const getUserBalance = () => {
 
-        userGetInfo().then((response: Response) => {
+        userGetBalance().then((response: Response) => {
             if (response?.status) {
-                setUser(response?.result as User)
+                setBalance(response?.result)
             } else {
                 showCustomAlert(response?.message)
             }
         });
-    }
-
-
-
-    const create = () => {
-
-        // // set type_id 
-        // setUser((prevState: any) => ({
-        //     ...prevState,
-        //     ['type_id']: process.env.REACT_APP_USER_TYPE_CUSTOMER
-        // }));
-
-        // userCreate(user).then((response: Response) => {
-        //     showCustomAlert(response?.message)
-        //     if (response?.status) {
-        //         props.history.push('/login');
-        //     }
-        // });
-
     }
 
     const showCustomAlert = (message: string) => {
@@ -169,10 +149,8 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
                 </IonItem>
 
                 <IonItem>
-                    {/* <IonBadge slot="start">$</IonBadge> */}
                     <IonLabel>BALANCE</IonLabel>
-                    <IonBadge slot="end" color="light">$ {user?.balance}</IonBadge>
-                    {/* <IonBadge slot="end">0</IonBadge> */}
+                    <IonBadge slot="end" color="warning">$ {balance}</IonBadge>
                 </IonItem>
 
                 <IonCard>
