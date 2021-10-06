@@ -25,8 +25,8 @@ export function useUserService() {
         return res.data as unknown as Response;
     };
 
-    const userGetInfo = async () => {
-        const URL = API_URL + MODEL + 'get-info';
+    const userGetBalance = async () => {
+        const URL = API_URL + MODEL + 'get-balance';
         const res = await axios.get(URL, getHeader());
         return res.data as unknown as Response;
     };
@@ -35,6 +35,6 @@ export function useUserService() {
     return {
         userLogin,
         userCreate,
-        userGetInfo
+        userGetBalance
     };
 }
