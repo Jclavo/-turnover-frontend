@@ -1,13 +1,12 @@
 import {
     IonContent, IonHeader, IonPage, IonTitle,
-    IonToolbar, IonItem, IonInput, IonLabel, IonRow, IonCol,
-    IonGrid, IonButton, IonAlert, useIonViewDidEnter, IonDatetime,
-    IonBadge, IonCard, IonIcon, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
+    IonToolbar, IonItem, IonLabel,
+    IonButton, IonAlert, IonDatetime,
+    IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle,
 } from '@ionic/react';
 import { cashOutline, cart } from 'ionicons/icons';
 import { RouteComponentProps } from 'react-router';
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { format } from "date-fns";
 //CSS
 import './BalancePage.css';
@@ -27,7 +26,6 @@ import { useUserService } from "../../hooks/useUserService";
 
 const BalancePage: React.FC<RouteComponentProps> = (props) => {
 
-    const location = useLocation();
     const { purchasePagination } = usePurchaseService();
     const { depositPagination } = useDepositService();
     const { userGetInfo } = useUserService();
@@ -43,8 +41,6 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
     const [purchases, setPurchases] = useState<Purchase[]>([]);
     const [deposit, setDeposit] = useState<Deposit>();
     const [deposits, setDeposits] = useState<Deposit[]>([]);
-
-
 
 
     const [selectedDate, setSelectedDate] = useState<string>(format(new Date(), 'yyyy-MM-dd'));
