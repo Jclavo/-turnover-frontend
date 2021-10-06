@@ -20,8 +20,15 @@ export function usePurchaseService() {
         return res.data as unknown as Response;
     };
 
+    const purchaseCreate = async (purchase : Purchase | undefined) => {
+        const URL = API_URL + MODEL;
+
+        const res = await axios.post(URL, purchase, getHeader());
+        return res.data as unknown as Response;
+    };
 
     return {
-        purchasePagination
+        purchasePagination,
+        purchaseCreate
     };
 }

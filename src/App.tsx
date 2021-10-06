@@ -27,6 +27,7 @@ import LoginPage from './pages/login/LoginPage';
 import UserPage from './pages/user/UserPage';
 import BalancePage from './pages/balance/BalancePage';
 import PurchasesListPage from './pages/purchase/purchasesList/PurchasesListPage';
+import PurchasePage from './pages/purchase/purchase/PurchasePage';
 
 const App: React.FC = () => {
   return (
@@ -45,6 +46,7 @@ const App: React.FC = () => {
             <Route path="/user" component={UserPage} exact />
             <Route path="/balance" component={BalancePage} exact />
             <Route path="/expenses" component={PurchasesListPage} exact />
+            <Route path="/purchase" component={PurchasePage} exact />
             <Redirect from="/" to="/user" exact />
           </IonRouterOutlet>
         </IonSplitPane>
