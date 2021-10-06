@@ -4,7 +4,7 @@ import {
     IonButton, IonAlert, IonDatetime,
     IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle,
 } from '@ionic/react';
-import { cashOutline, cart } from 'ionicons/icons';
+import { cashOutline, arrowDown } from 'ionicons/icons';
 import { RouteComponentProps } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
@@ -185,7 +185,7 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
                 </IonCard>
                 <IonCard>
                     <IonItem>
-                        <IonIcon icon={cart} slot="start" />
+                        <IonIcon icon={arrowDown} slot="start" />
                         <IonLabel>EXPENSES</IonLabel>
                         <IonBadge slot="end">$ {expenses}</IonBadge>
                         <IonButton fill="outline" slot="end">Purchase</IonButton>

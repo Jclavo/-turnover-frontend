@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { cashOutline, heartSharp, cart } from 'ionicons/icons';
+import { cashOutline, heartSharp, arrowDown } from 'ionicons/icons';
 import './Menu.css';
 
 //hooks
@@ -32,9 +32,9 @@ const appPages: AppPage[] = [
   },
 
   {
-    title: 'Purchases',
-    url: '/Purchases',
-    mdIcon: cart
+    title: 'Expenses',
+    url: '/expenses',
+    mdIcon: arrowDown
   },
   {
     title: 'Deposits',
