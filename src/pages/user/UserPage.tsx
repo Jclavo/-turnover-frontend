@@ -34,10 +34,12 @@ const UserPage: React.FC<RouteComponentProps> = (props) => {
 
 
     useIonViewDidEnter(() => {
-        // if (props.history.length > 1) {
-        //     // props.history.go(-(props.history.length - 1))
-        //     props.history.go(1)
-        // }
+        // set type_id 
+        setUser((prevState: any) => ({
+            ...prevState,
+            ['type_id']: process.env.REACT_APP_USER_TYPE_CUSTOMER
+        }));
+
         cleanStorage();
     });
 
@@ -55,19 +57,15 @@ const UserPage: React.FC<RouteComponentProps> = (props) => {
 
     const create = () => {
 
-        // set type_id 
-        setUser((prevState: any) => ({
-            ...prevState,
-            ['type_id']: process.env.REACT_APP_USER_TYPE_CUSTOMER
-        }));
+        if (user == undefined) return;
 
         userCreate(user).then((response: Response) => {
             showCustomAlert(response?.message)
             if (response?.status) {
+                setUser(undefined);
                 props.history.push('/login');
             }
         });
-
     }
 
     const showCustomAlert = (message: string) => {
