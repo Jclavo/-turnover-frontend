@@ -32,7 +32,7 @@ const DepositDetailPage: React.FC<RouteComponentProps> = (props) => {
     //useEffect when page loads 
     useEffect(() => {
         getDepositById(id as unknown as number);
-    }, []);
+    }, [props]);
 
     //useEffect when deposit changes
     useEffect(() => {
@@ -54,9 +54,9 @@ const DepositDetailPage: React.FC<RouteComponentProps> = (props) => {
         if(deposit?.status_id == process.env.REACT_APP_DEPOSIT_TYPE_PENDING) return;
         if(deposit === undefined) return;
 
-        console.log(deposit)
         depositUpdateStatus(deposit).then((response: Response) => {
             if (response?.status) {
+                setDeposit(undefined);
                 props.history.push('/deposits');
             } else {
                 showCustomAlert(response?.message)
