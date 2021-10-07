@@ -38,7 +38,7 @@ const appPages: AppPage[] = [
   },
   {
     title: 'Checks',
-    url: '/checks',
+    url: '/my-checks',
     mdIcon: cashOutline
   },
 

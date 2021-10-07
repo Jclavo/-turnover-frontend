@@ -58,7 +58,7 @@ const DepositPage: React.FC<RouteComponentProps> = (props) => {
             showCustomAlert(response?.message)
             if (response?.status) {
                 setDeposit(undefined);
-                props.history.push('/checks');
+                props.history.push('/my-checks');
             }
         });
 
