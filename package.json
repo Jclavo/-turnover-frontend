@@ -21,6 +21,7 @@
     "@types/react-router-dom": "^5.1.7",
     "axios": "^0.22.0",
     "date-fns": "^2.25.0",
+    "express": "^4.17.1",
     "ionicons": "^5.4.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -43,7 +44,7 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node serve.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
