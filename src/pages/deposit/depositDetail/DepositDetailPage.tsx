@@ -33,14 +33,14 @@ const DepositDetailPage: React.FC<RouteComponentProps> = (props) => {
 
     //useEffect when page loads 
     useEffect(() => {
-        if(!location.pathname.startsWith('/my-deposits')) return; //Only run useEffect when it is in page route
+        if(!location.pathname.startsWith('/deposit-details')) return; //Only run useEffect when it is in page route
         
         getDepositById(id as unknown as number);
     }, [props]);
 
     //useEffect when deposit changes
     useEffect(() => {
-        if(!location.pathname.startsWith('/my-deposits')) return; //Only run useEffect when it is in page route
+        if(!location.pathname.startsWith('/deposit-details')) return; //Only run useEffect when it is in page route
         
         updateStatus();
     }, [deposit]);
