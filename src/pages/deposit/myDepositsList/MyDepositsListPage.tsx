@@ -126,15 +126,16 @@ const MyDepositsListPage: React.FC<RouteComponentProps> = (props) => {
                         </IonCardHeader>
 
                     </IonCard>
-                )}    
+                )}
+
+                {deposits.length == 0 ?  <IonButton expand="full" color="ligth"><IonLabel color="danger">No records</IonLabel></IonButton>: ''}
 
                 <IonFab vertical="bottom" horizontal="end" slot="fixed">
                     <IonFabButton onClick={() => props.history.push('/deposit')}>
                         <IonIcon icon={add} />
                     </IonFabButton>
                 </IonFab>
-           
-               
+
                 {/* Alert component */}
                 <IonAlert
                     isOpen={showAlert}
@@ -145,7 +146,7 @@ const MyDepositsListPage: React.FC<RouteComponentProps> = (props) => {
                     buttons={['OK']}
                 />
 
-            
+
             </IonContent>
         </IonPage>
     );

@@ -175,6 +175,7 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
 
                     </IonCard>
                 )}
+                {deposits.length == 0 ?  <IonButton expand="full" color="ligth"><IonLabel color="danger">No records</IonLabel></IonButton>: ''}
 
                 <IonCard>
                     <IonItem>
@@ -198,6 +199,9 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
 
                     </IonCard>
                 )}
+
+{purchases.length == 0 ?  <IonButton expand="full" color="ligth"><IonLabel color="danger">No records</IonLabel></IonButton>: ''}
+
 
                 
                 {/* Alert component */}

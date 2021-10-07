@@ -2,7 +2,7 @@ import {
     IonContent, IonHeader, IonPage, IonTitle,
     IonToolbar, IonItem, IonLabel,
     IonAlert, IonDatetime,
-    IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle, IonFab, IonFabButton,
+    IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle, IonFab, IonFabButton, IonButton,
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import { RouteComponentProps } from 'react-router';
@@ -26,7 +26,7 @@ const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
 
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>();
-    
+
     const [balance, setBalance] = useState<number>(0);
 
     const [purchase, setPurchase] = useState<Purchase>();
@@ -114,6 +114,9 @@ const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
 
                     </IonCard>
                 )}
+
+                {purchases.length == 0 ? <IonButton expand="full" color="ligth"><IonLabel color="danger">No records</IonLabel></IonButton> : ''}
+
 
                 <IonFab vertical="bottom" horizontal="end" slot="fixed">
                     <IonFabButton onClick={() => props.history.push('/purchase')}>

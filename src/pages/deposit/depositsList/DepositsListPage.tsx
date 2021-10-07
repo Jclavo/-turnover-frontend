@@ -27,7 +27,7 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
 
     const [deposits, setDeposits] = useState<Deposit[]>([]);
 
-    //useEffect when page loads and selectedDate/depositStatus changes
+    //useEffect when page loads
     useEffect(() => {
         getDeposits();
     }, [props]);
@@ -70,7 +70,9 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
                         </IonCardHeader>
 
                     </IonCard>
-                )}    
+                )}  
+
+                {deposits.length == 0 ?  <IonButton expand="full" color="ligth"><IonLabel color="danger">No records</IonLabel></IonButton>: ''}  
                        
                 {/* Alert component */}
                 <IonAlert
