@@ -32,13 +32,18 @@ export function useAuthentication() {
         return getUser()?.email;
     }
 
+    const getUserType = () => {
+        return getUser()?.type_id;
+    }
+
 
     return {
         saveUserInStorage,
         cleanStorage,
         getToken,
         getUserName,
-        getUserEmail
+        getUserEmail,
+        getUserType
     };
 
 }

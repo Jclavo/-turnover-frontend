@@ -30,7 +30,7 @@ const LoginPage: React.FC<RouteComponentProps> = (props) => {
 
     const location = useLocation();
     const { userLogin } = useUserService();
-    const { saveUserInStorage, cleanStorage } = useAuthentication();
+    const { saveUserInStorage, cleanStorage, getUserType } = useAuthentication();
 
 
     useIonViewDidEnter(() => {
@@ -62,7 +62,14 @@ const LoginPage: React.FC<RouteComponentProps> = (props) => {
         userLogin(user).then((response: Response) => {
             if (response?.status) {
                 saveUserInStorage(response?.result as User);
-                props.history.push('/balance');
+
+                console.log()
+                if (getUserType() == process.env.REACT_APP_USER_TYPE_ADMIN) {
+                    props.history.push('/checks');
+                }else{
+                    props.history.push('/balance');
+                }
+
             }else{
                 showCustomAlert(response?.message)
             }
@@ -119,7 +126,7 @@ const LoginPage: React.FC<RouteComponentProps> = (props) => {
                         <IonCol size="6" offset="3">
                             <IonItem>
                                 <IonLabel position="stacked"><strong>EMAIL</strong></IonLabel>
-                                <IonInput value={user?.email} placeholder="Email" name="email" onIonBlur={e => handleChange(e)} clearInput> </IonInput>
+                                <IonInput value={user?.email} placeholder="Email" name="email" onIonBlur={e => handleChange(e)}> </IonInput>
                             </IonItem>
                         </IonCol>
                     </IonRow>
@@ -127,7 +134,7 @@ const LoginPage: React.FC<RouteComponentProps> = (props) => {
                         <IonCol size="6" offset="3">
                             <IonItem>
                                 <IonLabel position="stacked"><strong>PASSWORD</strong></IonLabel>
-                                <IonInput value={user?.password} placeholder="Password" type="password" name="password" onIonBlur={e => handleChange(e)} clearInput> </IonInput>
+                                <IonInput value={user?.password} placeholder="Password" type="password" name="password" onIonBlur={e => handleChange(e)}> </IonInput>
                             </IonItem>
                         </IonCol>
                     </IonRow>

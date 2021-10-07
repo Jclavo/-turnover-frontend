@@ -16,6 +16,7 @@ import './Menu.css';
 
 //hooks
 import { useAuthentication } from "../hooks/useAuthentication";
+import { useEffect, useState } from 'react';
 
 interface AppPage {
   url: string;
@@ -23,7 +24,7 @@ interface AppPage {
   title: string;
 }
 
-const appPages: AppPage[] = [
+const menuCustomer: AppPage[] = [
 
   {
     title: 'Balance',
@@ -44,12 +45,21 @@ const appPages: AppPage[] = [
 
 ];
 
+const menuAdmin: AppPage[] = [
+  {
+    title: 'Checks Control',
+    url: '/checks',
+    mdIcon: cashOutline
+  },
+
+];
+console.log('sssss')
+
 const Menu: React.FC = (props) => {
   const location = useLocation();
 
   const { getUserName, getUserEmail } = useAuthentication();
-
-
+  const { getUserType } = useAuthentication();
 
   return (
     <IonMenu contentId="main" type="overlay" hidden={location.pathname === '/login' || location.pathname === '/user' ? true : false}>
@@ -57,7 +67,17 @@ const Menu: React.FC = (props) => {
         <IonList id="inbox-list">
           <IonListHeader>{getUserName()}</IonListHeader>
           <IonNote>{getUserEmail()}</IonNote>
-          {appPages.map((appPage, index) => {
+          {
+          (getUserType() == process.env.REACT_APP_USER_TYPE_ADMIN) ? menuAdmin.map((appPage, index) => {
+            return (
+              <IonMenuToggle key={index} autoHide={false}>
+                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
+                  <IonIcon slot="start" md={appPage.mdIcon} />
+                  <IonLabel>{appPage.title}</IonLabel>
+                </IonItem>
+              </IonMenuToggle>
+            );
+          }): menuCustomer.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
