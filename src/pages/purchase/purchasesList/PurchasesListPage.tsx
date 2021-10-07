@@ -5,7 +5,7 @@ import {
     IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle, IonFab, IonFabButton, IonButton,
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, useLocation } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
 //CSS
@@ -21,6 +21,8 @@ import { useUserService } from "../../../hooks/useUserService";
 
 const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
 
+    const location = useLocation();
+    
     const { purchasePagination } = usePurchaseService();
     const { userGetBalance } = useUserService();
 
@@ -37,7 +39,7 @@ const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
 
     //useEffect when page loads and selectedDate changes
     useEffect(() => {
-
+        if(!location.pathname.startsWith('/purchases')) return; //Only run useEffect when it is in page route
         //for purchases
         setPurchase((prevState: any) => ({
             ...prevState,
@@ -52,6 +54,8 @@ const PurchasesListPage: React.FC<RouteComponentProps> = (props) => {
 
     //useEffect to get purchases
     useEffect(() => {
+        if(!location.pathname.startsWith('/purchases')) return; //Only run useEffect when it is in page route
+        
         getPurchases();
     }, [purchase]);
 

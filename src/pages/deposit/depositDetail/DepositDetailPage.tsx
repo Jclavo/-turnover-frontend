@@ -4,7 +4,7 @@ import {
     IonGrid, IonButton, IonAlert, IonImg
 } from '@ionic/react';
 
-import { RouteComponentProps, useParams } from 'react-router';
+import { RouteComponentProps, useLocation, useParams } from 'react-router';
 import React, { useEffect, useRef, useState } from 'react';
 
 //CSS
@@ -22,6 +22,8 @@ const DepositDetailPage: React.FC<RouteComponentProps> = (props) => {
 
     const { id } = useParams<{ id: string; }>();
 
+    const location = useLocation();
+
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>();
 
@@ -31,11 +33,15 @@ const DepositDetailPage: React.FC<RouteComponentProps> = (props) => {
 
     //useEffect when page loads 
     useEffect(() => {
+        if(!location.pathname.startsWith('/my-deposits')) return; //Only run useEffect when it is in page route
+        
         getDepositById(id as unknown as number);
     }, [props]);
 
     //useEffect when deposit changes
     useEffect(() => {
+        if(!location.pathname.startsWith('/my-deposits')) return; //Only run useEffect when it is in page route
+        
         updateStatus();
     }, [deposit]);
 

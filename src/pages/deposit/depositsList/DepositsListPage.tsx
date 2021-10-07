@@ -5,7 +5,7 @@ import {
     IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle, IonSelect, IonSelectOption, IonFabButton, IonFab,
 } from '@ionic/react';
 import { cashOutline, arrowDown, add } from 'ionicons/icons';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, useLocation } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
 //CSS
@@ -20,6 +20,8 @@ import { useDepositService } from "../../../hooks/useDepositService";
 
 const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
 
+    const location = useLocation();
+    
     const { depositPagination } = useDepositService();
 
     const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -29,6 +31,8 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
 
     //useEffect when page loads
     useEffect(() => {
+        if(!location.pathname.startsWith('/deposits')) return; //Only run useEffect when it is in page route
+        
         getDeposits();
     }, [props]);
 

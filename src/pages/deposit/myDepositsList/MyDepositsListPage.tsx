@@ -5,7 +5,7 @@ import {
     IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle, IonSelect, IonSelectOption, IonFabButton, IonFab,
 } from '@ionic/react';
 import { cashOutline, arrowDown, add } from 'ionicons/icons';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, useLocation } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
 //CSS
@@ -22,6 +22,8 @@ import { useDepositStatusService } from "../../../hooks/useDepositStatusService"
 
 const MyDepositsListPage: React.FC<RouteComponentProps> = (props) => {
 
+    const location = useLocation();
+    
     const { depositPagination } = useDepositService();
     const { purchaseGetAll } = useDepositStatusService();
 
@@ -38,15 +40,18 @@ const MyDepositsListPage: React.FC<RouteComponentProps> = (props) => {
 
     const [selectedDate, setSelectedDate] = useState<string>(format(new Date(), 'yyyy-MM-dd'));
 
-    //useEffect when page loads and selectedDate changes
+    //useEffect when page loads
     useEffect(() => {
+        if(!location.pathname.startsWith('/my-deposits')) return; //Only run useEffect when it is in page route
+        
         getDepositStatuses();
 
     }, []);
 
-    //useEffect when page loads and selectedDate/depositStatus changes
+    //useEffect when  selectedDate/depositStatus changes
     useEffect(() => {
-
+        if(!location.pathname.startsWith('/my-deposits')) return; //Only run useEffect when it is in page route
+        
         // for deposits
         setDeposit((prevState: any) => ({
             ...prevState,
@@ -59,6 +64,8 @@ const MyDepositsListPage: React.FC<RouteComponentProps> = (props) => {
 
     //useEffect to get deposits
     useEffect(() => {
+        if(!location.pathname.startsWith('/my-deposits')) return; //Only run useEffect when it is in page route
+        
         getDeposits();
     }, [deposit]);
 

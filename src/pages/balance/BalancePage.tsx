@@ -5,7 +5,7 @@ import {
     IonBadge, IonCard, IonIcon, IonCardHeader, IonCardSubtitle,
 } from '@ionic/react';
 import { cashOutline, arrowDown } from 'ionicons/icons';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, useLocation } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
 //CSS
@@ -25,6 +25,8 @@ import { useUserService } from "../../hooks/useUserService";
 
 const BalancePage: React.FC<RouteComponentProps> = (props) => {
 
+    const location = useLocation();
+    
     const { purchasePagination } = usePurchaseService();
     const { depositPagination } = useDepositService();
     const { userGetBalance } = useUserService();
@@ -47,6 +49,8 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
     //useEffect when page loads and selectedDate changes
     useEffect(() => {
 
+        if(!location.pathname.startsWith('/balance')) return; //Only run useEffect when it is in page route
+        
         //for purchases
         setPurchase((prevState: any) => ({
             ...prevState,
@@ -69,11 +73,15 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
 
     //useEffect to get purchases
     useEffect(() => {
+        if(!location.pathname.startsWith('/balance')) return; //Only run useEffect when it is in page route
+        
         getPurchases();
     }, [purchase]);
 
     //useEffect to get update expenses 
     useEffect(() => {
+        if(!location.pathname.startsWith('/balance')) return; //Only run useEffect when it is in page route
+        
         let sumExpenses = 0
         purchases.forEach((element: Purchase) => {
             sumExpenses += Number(element.amount);
@@ -83,11 +91,15 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
 
      //useEffect to get deposits
      useEffect(() => {
+        if(!location.pathname.startsWith('/balance')) return; //Only run useEffect when it is in page route
+        
         getDeposits();
     }, [deposit]);
 
     //useEffect to get update incomes
     useEffect(() => {
+        if(!location.pathname.startsWith('/balance')) return; //Only run useEffect when it is in page route
+        
         let sumIncomes = 0
         deposits.forEach((element: Purchase) => {
             sumIncomes += Number(element.amount);

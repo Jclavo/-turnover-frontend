@@ -4,7 +4,7 @@ import {
     IonGrid, IonButton, IonAlert, useIonViewDidEnter, IonDatetime, IonTextarea, IonBadge
 } from '@ionic/react';
 
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, useLocation } from 'react-router';
 import React, { useEffect, useState } from 'react';
 import { format } from "date-fns";
 
@@ -21,6 +21,8 @@ import { useUserService } from "../../../hooks/useUserService";
 
 const PurchasePage: React.FC<RouteComponentProps> = (props) => {
 
+    const location = useLocation();
+    
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>();
 
@@ -43,7 +45,7 @@ const PurchasePage: React.FC<RouteComponentProps> = (props) => {
 
     //useEffect when page loads and selectedDate changes
     useEffect(() => {
-
+        if(!location.pathname.startsWith('/purchase')) return; //Only run useEffect when it is in page route
         //get user balance
         getUserBalance()
 
