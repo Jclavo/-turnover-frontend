@@ -67,7 +67,7 @@ const Menu: React.FC = (props) => {
   }
 
   return (
-    <IonMenu contentId="main" type="overlay" hidden={location.pathname === '/login' || location.pathname === '/user' ? true : false}>
+    <IonMenu contentId="main" type="overlay" hidden={location.pathname.toLowerCase() === '/login' || location.pathname.toLowerCase() === '/user' ? true : false}>
       <IonHeader>
         <IonToolbar color="primary">
           <IonTitle><strong>BNB Bank</strong></IonTitle>
