@@ -31,6 +31,7 @@ import PurchasePage from './pages/purchase/purchase/PurchasePage';
 import MyDepositsListPage from './pages/deposit/myDepositsList/MyDepositsListPage';
 import DepositsListPage from './pages/deposit/depositsList/DepositsListPage';
 import DepositPage from './pages/deposit/deposit/DepositPage';
+import DepositDetailPage from './pages/deposit/depositDetail/DepositDetailPage';
 
 const App: React.FC = () => {
   return (
@@ -53,6 +54,7 @@ const App: React.FC = () => {
             <Route path="/my-checks" component={MyDepositsListPage} exact />
             <Route path="/checks" component={DepositsListPage} exact />
             <Route path="/deposit" component={DepositPage} exact />
+            <Route path="/check-details/:id" component={DepositDetailPage} exact />
             <Redirect from="/" to="/user" exact />
           </IonRouterOutlet>
         </IonSplitPane>

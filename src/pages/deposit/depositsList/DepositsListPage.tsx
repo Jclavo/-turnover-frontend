@@ -17,12 +17,10 @@ import { Deposit } from "../../../interfaces/Deposit";
 
 //Hooks
 import { useDepositService } from "../../../hooks/useDepositService";
-import { useDepositStatusService } from "../../../hooks/useDepositStatusService";
 
 const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
 
     const { depositPagination } = useDepositService();
-    const { purchaseGetAll } = useDepositStatusService();
 
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>();
@@ -64,7 +62,7 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
                         <IonItem>
                             <IonLabel>{deposit.user.username}</IonLabel>
                             <IonBadge slot="end" color="success">$ {deposit.amount}</IonBadge>
-                            <IonButton fill="outline" slot="end" onClick={() => props.history.push('/check-details')}>DETAILS</IonButton>
+                            <IonButton fill="outline" slot="end" routerLink={`/check-details/${deposit.id}`} >DETAILS</IonButton>
                         </IonItem>
 
                         <IonCardHeader>
