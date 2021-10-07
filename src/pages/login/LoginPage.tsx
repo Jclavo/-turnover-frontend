@@ -145,6 +145,12 @@ const LoginPage: React.FC<RouteComponentProps> = (props) => {
                         </IonCol>
                     </IonRow>
 
+                    <IonRow className="ion-align-items-center">
+                        <IonCol size="6" offset="3">
+                            <IonButton color="light" expand="full" shape="round" onClick={() => props.history.push('/user')}>Create User</IonButton>
+                        </IonCol>
+                    </IonRow>
+
                 </IonGrid>
 
                 {/* Alert component */}
