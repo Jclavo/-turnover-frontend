@@ -14,7 +14,6 @@ import './DepositsListPage.css';
 //Interfaces
 import { Response } from "../../../interfaces/Response";
 import { Deposit } from "../../../interfaces/Deposit";
-import { DepositStatus } from "../../../interfaces/DepositStatus";
 
 //Hooks
 import { useDepositService } from "../../../hooks/useDepositService";
@@ -28,58 +27,18 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>();
 
-    const [deposit, setDeposit] = useState<Deposit>();
     const [deposits, setDeposits] = useState<Deposit[]>([]);
-
-
-    const [depositStatus, setdepositStatus] = useState<number>(1); //process.env.REACT_APP_DEPOSIT_TYPE_ACCEPTED
-    const [depositStatuses, setdepositStatuses] = useState<DepositStatus[]>([]);
-
-
-    const [selectedDate, setSelectedDate] = useState<string>(format(new Date(), 'yyyy-MM-dd'));
-
-    //useEffect when page loads and selectedDate changes
-    useEffect(() => {
-        getDepositStatuses();
-
-    }, []);
 
     //useEffect when page loads and selectedDate/depositStatus changes
     useEffect(() => {
-
-        // for deposits
-        setDeposit((prevState: any) => ({
-            ...prevState,
-            ['status_id']: depositStatus,
-            ['created_at']: selectedDate,
-        }));
-        setDeposits([]);
-
-    }, [props, selectedDate, depositStatus]);
-
-    //useEffect to get deposits
-    useEffect(() => {
         getDeposits();
-    }, [deposit]);
-
+    }, [props]);
 
     const getDeposits = () => {
 
-        if (deposit === undefined) return;
-        depositPagination(deposit).then((response: Response) => {
+        depositPagination(undefined).then((response: Response) => {
             if (response?.status) {
                 setDeposits(response?.result as Deposit[] ?? [])
-            } else {
-                showCustomAlert(response?.message)
-            }
-        });
-    }
-
-    const getDepositStatuses = () => {
-
-        purchaseGetAll().then((response: Response) => {
-            if (response?.status) {
-                setdepositStatuses(response?.result as DepositStatus[] ?? [])
             } else {
                 showCustomAlert(response?.message)
             }
@@ -95,30 +54,17 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar color="primary">
-                    <IonTitle><strong>CHECKS</strong></IonTitle>
+                    <IonTitle><strong>CHECKS CONTROL</strong></IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
 
-                <IonItem>
-                    <IonDatetime displayFormat="YYYY-MM-DD" placeholder="Select Date" value={selectedDate} onIonChange={e => setSelectedDate(e.detail.value!)} ></IonDatetime>
-                </IonItem>
-                <IonItem>
-                    <IonLabel>Status</IonLabel>
-                    <IonSelect value={depositStatus} onIonChange={e => setdepositStatus(e.detail.value!)} >
-                        {depositStatuses.map(depositStatus => (
-                            <IonSelectOption key={depositStatus.id} value={depositStatus.code}>
-                                {depositStatus.name}
-                            </IonSelectOption>
-                        ))}
-                    </IonSelect>
-                </IonItem>
-
                 {deposits.map((deposit, idx) =>
                     <IonCard key={idx}>
                         <IonItem>
-                            <IonLabel>{deposit.description}</IonLabel>
+                            <IonLabel>{deposit.user.username}</IonLabel>
                             <IonBadge slot="end" color="success">$ {deposit.amount}</IonBadge>
+                            <IonButton fill="outline" slot="end" onClick={() => props.history.push('/check-details')}>DETAILS</IonButton>
                         </IonItem>
 
                         <IonCardHeader>
@@ -127,14 +73,7 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
 
                     </IonCard>
                 )}    
-
-                <IonFab vertical="bottom" horizontal="end" slot="fixed">
-                    <IonFabButton onClick={() => props.history.push('/deposit')}>
-                        <IonIcon icon={add} />
-                    </IonFabButton>
-                </IonFab>
-           
-               
+                       
                 {/* Alert component */}
                 <IonAlert
                     isOpen={showAlert}

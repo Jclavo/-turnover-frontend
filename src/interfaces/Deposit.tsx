@@ -1,3 +1,5 @@
+import {User} from './User';
+
 export interface Deposit {
     id: number;
     amount: number;
@@ -6,4 +8,5 @@ export interface Deposit {
     status_id: number;
     user_id: number;
     created_at: string;
+    user: User;
 }
