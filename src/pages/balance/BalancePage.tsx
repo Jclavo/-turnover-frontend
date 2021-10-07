@@ -158,32 +158,9 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
                         <IonIcon icon={cashOutline} slot="start" />
                         <IonLabel>INCOMES</IonLabel>
                         <IonBadge slot="end">$ {incomes}</IonBadge>
-                        <IonButton fill="outline" slot="end">Deposit a check</IonButton>
+                        <IonButton fill="outline" slot="end" routerLink="/deposit/">Deposit a check</IonButton>
                     </IonItem>
                 </IonCard>
-                <IonCard>
-                    <IonItem>
-                        <IonIcon icon={arrowDown} slot="start" />
-                        <IonLabel>EXPENSES</IonLabel>
-                        <IonBadge slot="end">$ {expenses}</IonBadge>
-                        <IonButton fill="outline" slot="end">Purchase</IonButton>
-                    </IonItem>
-                </IonCard>
-
-
-                {purchases.map((purchase, idx) =>
-                    <IonCard key={idx}>
-                        <IonItem>
-                            <IonLabel>{purchase.description}</IonLabel>
-                            <IonBadge slot="end" color="danger">-$ {purchase.amount}</IonBadge>
-                        </IonItem>
-
-                        <IonCardHeader>
-                            <IonCardSubtitle>{format(new Date(purchase.created_at), "yyyy-MM-dd, h:mm a")}</IonCardSubtitle>
-                        </IonCardHeader>
-
-                    </IonCard>
-                )}
 
                 {deposits.map((deposit, idx) =>
                     <IonCard key={idx}>
@@ -199,7 +176,30 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
                     </IonCard>
                 )}
 
+                <IonCard>
+                    <IonItem>
+                        <IonIcon icon={arrowDown} slot="start" />
+                        <IonLabel>EXPENSES</IonLabel>
+                        <IonBadge slot="end">$ {expenses}</IonBadge>
+                        <IonButton fill="outline" slot="end" routerLink="/purchase/">Purchase</IonButton>
+                    </IonItem>
+                </IonCard>
 
+                {purchases.map((purchase, idx) =>
+                    <IonCard key={idx}>
+                        <IonItem>
+                            <IonLabel>{purchase.description}</IonLabel>
+                            <IonBadge slot="end" color="danger">-$ {purchase.amount}</IonBadge>
+                        </IonItem>
+
+                        <IonCardHeader>
+                            <IonCardSubtitle>{format(new Date(purchase.created_at), "yyyy-MM-dd, h:mm a")}</IonCardSubtitle>
+                        </IonCardHeader>
+
+                    </IonCard>
+                )}
+
+                
                 {/* Alert component */}
                 <IonAlert
                     isOpen={showAlert}
