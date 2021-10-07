@@ -7,7 +7,7 @@ import { Purchase } from "../interfaces/Purchase";
 import { useUtils } from "./useUtils";
 
 const API_URL = process.env.REACT_APP_API_URL;
-const MODEL = "deposit-statuses/"
+const MODEL = "deposit-statuses"
 
 export function useDepositStatusService() {
 

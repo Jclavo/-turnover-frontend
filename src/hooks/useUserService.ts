@@ -7,7 +7,7 @@ import { User } from "../interfaces/User";
 import { useUtils } from "../hooks/useUtils";
 
 const API_URL = process.env.REACT_APP_API_URL;
-const MODEL = "users/"
+const MODEL = "users"
 
 export function useUserService() {
 
@@ -26,7 +26,7 @@ export function useUserService() {
     };
 
     const userGetBalance = async () => {
-        const URL = API_URL + MODEL + 'get-balance';
+        const URL = API_URL + MODEL + '/' + 'get-balance';
         const res = await axios.get(URL, getHeader());
         return res.data as unknown as Response;
     };
