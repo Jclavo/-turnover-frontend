@@ -1,5 +1,6 @@
 import {
   IonContent,
+  IonHeader,
   IonIcon,
   IonItem,
   IonLabel,
@@ -8,6 +9,8 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
@@ -53,7 +56,6 @@ const menuAdmin: AppPage[] = [
   },
 
 ];
-console.log('sssss')
 
 const Menu: React.FC = (props) => {
   const location = useLocation();
@@ -63,30 +65,35 @@ const Menu: React.FC = (props) => {
 
   return (
     <IonMenu contentId="main" type="overlay" hidden={location.pathname === '/login' || location.pathname === '/user' ? true : false}>
+      <IonHeader>
+        <IonToolbar color="primary">
+          <IonTitle><strong>BNB Bank</strong></IonTitle>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>{getUserName()}</IonListHeader>
           <IonNote>{getUserEmail()}</IonNote>
           {
-          (getUserType() == process.env.REACT_APP_USER_TYPE_ADMIN) ? menuAdmin.map((appPage, index) => {
-            return (
-              <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                  <IonIcon slot="start" md={appPage.mdIcon} />
-                  <IonLabel>{appPage.title}</IonLabel>
-                </IonItem>
-              </IonMenuToggle>
-            );
-          }): menuCustomer.map((appPage, index) => {
-            return (
-              <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                  <IonIcon slot="start" md={appPage.mdIcon} />
-                  <IonLabel>{appPage.title}</IonLabel>
-                </IonItem>
-              </IonMenuToggle>
-            );
-          })}
+            (getUserType() == process.env.REACT_APP_USER_TYPE_ADMIN) ? menuAdmin.map((appPage, index) => {
+              return (
+                <IonMenuToggle key={index} autoHide={false}>
+                  <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
+                    <IonIcon slot="start" md={appPage.mdIcon} />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </IonItem>
+                </IonMenuToggle>
+              );
+            }) : menuCustomer.map((appPage, index) => {
+              return (
+                <IonMenuToggle key={index} autoHide={false}>
+                  <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
+                    <IonIcon slot="start" md={appPage.mdIcon} />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </IonItem>
+                </IonMenuToggle>
+              );
+            })}
         </IonList>
 
       </IonContent>
