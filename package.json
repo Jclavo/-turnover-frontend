@@ -1,6 +1,6 @@
 {
-  "name": "myApp",
-  "version": "0.0.1",
+  "name": "bnb-app",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@capacitor/app": "1.0.3",
