@@ -65,7 +65,7 @@ const LoginPage: React.FC<RouteComponentProps> = (props) => {
 
                 console.log()
                 if (getUserType() == process.env.REACT_APP_USER_TYPE_ADMIN) {
-                    props.history.push('/checks');
+                    props.history.push('/deposits');
                 }else{
                     props.history.push('/balance');
                 }

@@ -49,12 +49,12 @@ const App: React.FC = () => {
             <Route path="/login" component={LoginPage} exact />
             <Route path="/user" component={UserPage} exact />
             <Route path="/balance" component={BalancePage} exact />
-            <Route path="/expenses" component={PurchasesListPage} exact />
+            <Route path="/purchases" component={PurchasesListPage} exact />
             <Route path="/purchase" component={PurchasePage} exact />
-            <Route path="/my-checks" component={MyDepositsListPage} exact />
-            <Route path="/checks" component={DepositsListPage} exact />
+            <Route path="/my-deposits" component={MyDepositsListPage} exact />
+            <Route path="/deposits" component={DepositsListPage} exact />
             <Route path="/deposit" component={DepositPage} exact />
-            <Route path="/check-details/:id" component={DepositDetailPage} exact />
+            <Route path="/deposit-details/:id" component={DepositDetailPage} exact />
             <Redirect from="/" to="/user" exact />
           </IonRouterOutlet>
         </IonSplitPane>

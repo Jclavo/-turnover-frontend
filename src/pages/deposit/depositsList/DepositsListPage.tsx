@@ -62,7 +62,7 @@ const DepositsListPage: React.FC<RouteComponentProps> = (props) => {
                         <IonItem>
                             <IonLabel>{deposit.user.username}</IonLabel>
                             <IonBadge slot="end" color="success">$ {deposit.amount}</IonBadge>
-                            <IonButton fill="outline" slot="end" routerLink={`/check-details/${deposit.id}`} >DETAILS</IonButton>
+                            <IonButton fill="outline" slot="end" routerLink={`/deposit-details/${deposit.id}`} >DETAILS</IonButton>
                         </IonItem>
 
                         <IonCardHeader>

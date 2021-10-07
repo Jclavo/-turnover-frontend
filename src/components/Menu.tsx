@@ -37,12 +37,12 @@ const menuCustomer: AppPage[] = [
 
   {
     title: 'Expenses',
-    url: '/expenses',
+    url: '/purchases',
     mdIcon: arrowDown
   },
   {
     title: 'Checks',
-    url: '/my-checks',
+    url: '/my-deposits',
     mdIcon: cashOutline
   },
 
@@ -51,7 +51,7 @@ const menuCustomer: AppPage[] = [
 const menuAdmin: AppPage[] = [
   {
     title: 'Checks Control',
-    url: '/checks',
+    url: '/deposits',
     mdIcon: cashOutline
   },
 

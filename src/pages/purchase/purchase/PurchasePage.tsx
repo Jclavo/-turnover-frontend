@@ -55,7 +55,7 @@ const PurchasePage: React.FC<RouteComponentProps> = (props) => {
             showCustomAlert(response?.message)
             if (response?.status) {
                 setPurchase(undefined);
-                props.history.push('/expenses');
+                props.history.push('/purchases');
             }
         });
 

@@ -57,7 +57,7 @@ const DepositDetailPage: React.FC<RouteComponentProps> = (props) => {
         console.log(deposit)
         depositUpdateStatus(deposit).then((response: Response) => {
             if (response?.status) {
-                props.history.push('/checks');
+                props.history.push('/deposits');
             } else {
                 showCustomAlert(response?.message)
             }
