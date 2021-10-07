@@ -14,7 +14,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { cashOutline, heartSharp, arrowDown, book } from 'ionicons/icons';
+import { cashOutline, heartSharp, arrowDown, book, logOut } from 'ionicons/icons';
 import './Menu.css';
 
 //hooks
@@ -60,8 +60,11 @@ const menuAdmin: AppPage[] = [
 const Menu: React.FC = (props) => {
   const location = useLocation();
 
-  const { getUserName, getUserEmail } = useAuthentication();
-  const { getUserType } = useAuthentication();
+  const { getUserName, getUserEmail, getUserType, cleanStorage } = useAuthentication();
+
+  const logout = () => {
+    cleanStorage();
+  }
 
   return (
     <IonMenu contentId="main" type="overlay" hidden={location.pathname === '/login' || location.pathname === '/user' ? true : false}>
@@ -94,6 +97,14 @@ const Menu: React.FC = (props) => {
                 </IonMenuToggle>
               );
             })}
+        </IonList>
+
+        <IonList id="labels-list">
+          {/* <IonListHeader></IonListHeader> */}
+            <IonItem lines="none" routerLink="/login" onClick={() => logout()} >
+              <IonIcon slot="start" icon={logOut} color="danger" />
+              <IonLabel>Sair</IonLabel>
+            </IonItem>
         </IonList>
 
       </IonContent>
