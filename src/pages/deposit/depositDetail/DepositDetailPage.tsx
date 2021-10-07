@@ -80,7 +80,7 @@ const DepositDetailPage: React.FC<RouteComponentProps> = (props) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar color="primary">
-                    <IonTitle><strong>CHECK DETAILS</strong></IonTitle>
+                    <IonTitle><strong>Check Details</strong></IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>

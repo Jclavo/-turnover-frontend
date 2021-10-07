@@ -139,7 +139,7 @@ const BalancePage: React.FC<RouteComponentProps> = (props) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar color="primary">
-                    <IonTitle><strong>BNB Bank</strong></IonTitle>
+                    <IonTitle><strong>Balance</strong></IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>

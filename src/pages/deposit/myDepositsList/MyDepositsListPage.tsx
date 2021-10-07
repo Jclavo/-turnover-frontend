@@ -95,7 +95,7 @@ const MyDepositsListPage: React.FC<RouteComponentProps> = (props) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar color="primary">
-                    <IonTitle><strong>CHECKS</strong></IonTitle>
+                    <IonTitle><strong>Checks</strong></IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
